@@ -1,0 +1,17 @@
+:root {
+  /* Main Color Palette */
+  --bg_color: #000000;
+  --text_color: #ffffff;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color-scheme: light dark;
+
+  color: var(--text_color);
+  background-color: var(--bg_color);
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}

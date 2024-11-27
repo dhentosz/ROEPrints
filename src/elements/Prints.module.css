@@ -1,0 +1,10 @@
+.prints_container {
+    width: 95%;
+    height: 90vh;
+    background-color: rgb(75, 75, 75);
+    margin: auto;
+    border-radius: 1.3rem;
+    border: 0.2rem solid rgb(206, 205, 205);
+    display: flex;
+    justify-content: center;
+}
