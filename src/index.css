@@ -2,6 +2,11 @@
   /* Main Color Palette */
   --bg_color: #000000;
   --text_color: #ffffff;
+  --dark_green: #00523b;
+  --med_green: #098343;
+  --light_green: #93c854;
+  --gray: #88857d;
+  --light_gray: #c5c3c4;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
