@@ -4,9 +4,7 @@
 
 ToDo
 
-- gather colors
-- set header
-- add logo
+- gather colors/create variables
 - create component for displaying a print jobs info
 - container for all print jobs
 - integrate with API
