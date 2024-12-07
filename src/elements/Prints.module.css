@@ -7,4 +7,5 @@
     border: 0.2rem solid var(--light_gray);
     display: flex;
     justify-content: center;
+    font-weight: 1;
 }
