@@ -1,0 +1,6 @@
+.active_container {
+    background-color: var(--light_gray);
+    width: 45%;
+    height: 95%;
+    border-radius: 0.6rem;
+}
