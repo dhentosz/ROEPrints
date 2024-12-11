@@ -4,5 +4,5 @@
 
 ToDo
 
-- create component for displaying a single print jobs info
-- integrate with API
+- integrate with carbonAPI
+- pull asiga print data
