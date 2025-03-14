@@ -1,3 +1,5 @@
+// Main container element to hold active and finished print lists
+
 import styles from "./Prints.module.css";
 import FinishedPrints from "./FinishedPrints";
 import ActivePrints from "./ActivePrints";

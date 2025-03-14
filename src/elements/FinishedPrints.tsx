@@ -1,3 +1,5 @@
+// Element to display finished print jobs that are in need of attention
+
 import styles from "./FinishedPrints.module.css";
 import Job from "./Job";
 
