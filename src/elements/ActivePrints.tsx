@@ -1,13 +1,13 @@
 // Element to display prints that are actively building
 
 import styles from "./ActivePrints.module.css";
-import Job from "./Job";
+import CarbonAPI from "../api/CarbonAPI";
 
 export default function ActivePrints() {
   return (
     <div className={styles.active_container}>
-      active
-      <Job />
+      <h2>Currently Printing</h2>
+      <CarbonAPI printState="PRINTING" />
     </div>
   );
 }
