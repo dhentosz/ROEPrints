@@ -1,6 +1,8 @@
 .print_job {
-    width: 90%;
-    height: 3rem;
-    background-color: var(--gray);
-    margin:auto
+  padding: 0.5rem;
+  width: 90%;
+  height: 5rem;
+  background-color: var(--gray);
+  margin: auto;
+  margin-top: 1rem;
 }
