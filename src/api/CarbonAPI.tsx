@@ -58,32 +58,37 @@ export default function CarbonAPI({ printState }: Props) {
   // Header to be passed with fetch call for API request
   const header = { headers: { Authorization: `Bearer ${apiKey}` } };
 
-  // Array of Job components to be gatehred and passed back to parent
+  // Array of Job components to be gathered and passed back to parent
   const jobs: JSX.Element[] = [];
-
-  // Function to fetch API data and store into state variable printData
-  const gatherData = async () => {
-    try {
-      fetch(apiUrl, header)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`Network Error: ${res.status}`);
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setPrintData(data);
-        });
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // API Call
   useEffect(() => {
-    gatherData();
+    // Function to fetch API data and store into state variable printData
+    const gatherData = async () => {
+      try {
+        fetch(apiUrl, header)
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error(`Network Error: ${res.status}`);
+            }
+            return res.json();
+          })
+          .then((data) => {
+            setPrintData(data);
+          });
+      } catch (e: any) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Sets refresh interval to continuously pull data.
+    const interval = setInterval(() => {
+      gatherData();
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // State management blocks to handle loading, error, and data display states
@@ -103,6 +108,7 @@ export default function CarbonAPI({ printState }: Props) {
           <Job
             printerName={printData?.printers[i].alias}
             jobName={printData?.printers[i].prints.current.name}
+            timeLeft={printData?.printers[i].prints.current.remaining_sec}
           />
         );
       }

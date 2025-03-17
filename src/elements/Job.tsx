@@ -6,13 +6,15 @@ import styles from "./Job.module.css";
 interface Props {
   printerName: string;
   jobName: string;
+  timeLeft: number;
 }
 
-export default function Job({ printerName, jobName }: Props) {
+export default function Job({ printerName, jobName, timeLeft }: Props) {
   return (
     <div className={styles.print_job}>
       <h3>{printerName}</h3>
-      <h4>{jobName}</h4>
+      <div>{jobName}</div>
+      <h4>{Math.ceil(timeLeft / 60)} minutes left</h4>
     </div>
   );
 }
