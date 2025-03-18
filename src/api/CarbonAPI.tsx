@@ -58,7 +58,7 @@ export default function CarbonAPI({ printState }: Props) {
   // Header to be passed with fetch call for API request
   const header = { headers: { Authorization: `Bearer ${apiKey}` } };
 
-  // Array of Job components to be gathered and passed back to parent
+  // Empty array for Job components to be gathered
   const jobs: JSX.Element[] = [];
 
   // API Call
@@ -104,16 +104,35 @@ export default function CarbonAPI({ printState }: Props) {
   if (printData) {
     for (let i = 0; i < printData?.total_count; i++) {
       if (printState === printData?.printers[i].status.printer_state) {
-        jobs.push(
-          <Job
-            printerName={printData?.printers[i].alias}
-            jobName={printData?.printers[i].prints.current.name}
-            timeLeft={printData?.printers[i].prints.current.remaining_sec}
-          />
-        );
+        switch (printState) {
+          case "PRINTING":
+            jobs.push(
+              <Job
+                printerName={printData?.printers[i].alias}
+                jobName={printData?.printers[i].prints.current.name}
+                timeLeft={printData?.printers[i].prints.current.remaining_sec}
+              />
+            );
+            jobs.sort((a, b) => a.props.timeLeft - b.props.timeLeft);
+            break;
+          case "FINISHING_JOB":
+          case "WANT_PART_REMOVAL":
+            jobs.push(
+              <Job
+                printerName={printData?.printers[i].alias}
+                jobName={printData?.printers[i].prints.last.name}
+                timeLeft={0}
+              />
+            );
+            break;
+          default:
+            <div>Unusual Printer State</div>;
+            break;
+        }
       }
     }
   }
 
+  // Return sorted array of jobs to parent.
   return jobs;
 }
