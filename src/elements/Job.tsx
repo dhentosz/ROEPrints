@@ -10,11 +10,48 @@ interface Props {
 }
 
 export default function Job({ printerName, jobName, timeLeft }: Props) {
-  return (
-    <div className={styles.print_job}>
-      <h3>{printerName}</h3>
-      <div>{jobName}</div>
-      <h4>{Math.ceil(timeLeft / 60)} minutes left</h4>
-    </div>
-  );
+  // Convert time left to minutes.
+  if (timeLeft > 0) {
+    timeLeft = timeLeft / 60;
+  }
+
+  switch (true) {
+    case timeLeft === 0:
+      return (
+        <div className={styles.print_job}>
+          <h3>{printerName}</h3>
+          <div>{jobName}</div>
+        </div>
+      );
+      break;
+    case timeLeft > 0 && timeLeft < 1:
+      return (
+        <div className={styles.print_job}>
+          <h3>{printerName}</h3>
+          <div>{jobName}</div>
+          <h4>less than one minute left</h4>
+        </div>
+      );
+      break;
+    case timeLeft > 1 && timeLeft < 60:
+      return (
+        <div className={styles.print_job}>
+          <h3>{printerName}</h3>
+          <div>{jobName}</div>
+          <h4>{Math.ceil(timeLeft)} minutes left</h4>
+        </div>
+      );
+      break;
+    case timeLeft > 60:
+      return (
+        <div className={styles.print_job}>
+          <h3>{printerName}</h3>
+          <div>{jobName}</div>
+          <h4>
+            {Math.floor(timeLeft / 60)} hours {Math.ceil(timeLeft % 60)} minutes
+            left
+          </h4>
+        </div>
+      );
+  }
 }

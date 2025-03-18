@@ -6,9 +6,12 @@
 
 ToDo
 
-- sort data by time remaining
-- logic in data processing to change data shown in Job components for printing, finishing, and finished jobs.
-- deal with overflowing content. Dynamically adjust Job elements so as to all fit within parent container or scroll box?
-- add logic for hours and minutes remaining. less than one minute. match carbon site.
+- reasses need for switch statement in CarbonAPI element. may be redundant.
+
+- deal with overflowing content
 - transition APIKey and URL to environment variables
 - separate API call and data processing into separate components
+- sort job array for finishing and finished jobs (base off of time job finished?). printing already good
+
+- when switching to finished from printing, job name is delayed (still shows previously finished job)
+- reformat finishing prints. place at top of printing container again but display "finishing" in place of jobName? would solve above issue.
