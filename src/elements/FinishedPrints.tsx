@@ -6,8 +6,14 @@ import CarbonAPI from "../api/CarbonAPI";
 export default function FinishedPrints() {
   return (
     <div className={styles.finished_container}>
-      <h2>Ready To Pull</h2>
+      <h2>Ready</h2>
       <CarbonAPI printState="WANT_PART_REMOVAL" />
+
+      {/* Remove line break later when adjsuting css and formatting. */}
+      <br />
+
+      <h2>Finishing</h2>
+      <CarbonAPI printState="FINISHING_JOB" />
     </div>
   );
 }
