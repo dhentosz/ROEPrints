@@ -6,8 +6,7 @@ import CarbonAPI from "../api/CarbonAPI";
 export default function ActivePrints() {
   return (
     <div className={styles.active_container}>
-      <h2>Currently Printing</h2>
-      <CarbonAPI printState="FINISHING_JOB" />
+      <h2>Printing</h2>
       <CarbonAPI printState="PRINTING" />
     </div>
   );
