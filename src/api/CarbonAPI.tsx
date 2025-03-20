@@ -51,9 +51,9 @@ export default function CarbonAPI({ printState }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // API key and URL variables
-  const apiUrl = "";
-  const apiKey = "";
+  // API URL and Key variables
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   // Header to be passed with fetch call for API request
   const header = { headers: { Authorization: `Bearer ${apiKey}` } };
