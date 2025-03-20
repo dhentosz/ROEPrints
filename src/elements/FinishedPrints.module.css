@@ -1,7 +1,9 @@
 .finished_container {
+    padding: 1rem;
     background-color: var(--light_gray);
     width: 45%;
     height: 95%;
     border-radius: 0.6rem;
     text-align: center;
+    overflow: auto;
 }
