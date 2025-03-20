@@ -100,7 +100,7 @@ export default function CarbonAPI({ printState }: Props) {
     return <p>Error: {error}</p>;
   }
 
-  // Handles data dependent upon printState prop passed from parent and builds array of Jobs to pass back
+  // Handles data dependent upon printState prop passed from parent and builds/sorts array of Jobs to pass back accordingly
   if (printData) {
     for (let i = 0; i < printData?.total_count; i++) {
       if (printState === printData?.printers[i].status.printer_state) {
@@ -111,18 +111,35 @@ export default function CarbonAPI({ printState }: Props) {
                 printerName={printData?.printers[i].alias}
                 jobName={printData?.printers[i].prints.current.name}
                 timeLeft={printData?.printers[i].prints.current.remaining_sec}
+                finishedAt="N/A"
               />
             );
             jobs.sort((a, b) => a.props.timeLeft - b.props.timeLeft);
             break;
           case "FINISHING_JOB":
+            jobs.push(
+              <Job
+                printerName={printData?.printers[i].alias}
+                jobName="Print Finishing"
+                timeLeft={0}
+                finishedAt={printData?.printers[i].prints.last.finished_at}
+              />
+            );
+            jobs.sort((a, b) =>
+              a.props.finishedAt.localeCompare(b.props.finishedAt)
+            );
+            break;
           case "WANT_PART_REMOVAL":
             jobs.push(
               <Job
                 printerName={printData?.printers[i].alias}
                 jobName={printData?.printers[i].prints.last.name}
                 timeLeft={0}
+                finishedAt={printData?.printers[i].prints.last.finished_at}
               />
+            );
+            jobs.sort((a, b) =>
+              a.props.finishedAt.localeCompare(b.props.finishedAt)
             );
             break;
           default:

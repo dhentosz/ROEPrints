@@ -7,23 +7,30 @@ interface Props {
   printerName: string;
   jobName: string;
   timeLeft: number;
+  finishedAt: string;
 }
 
-export default function Job({ printerName, jobName, timeLeft }: Props) {
+export default function Job({
+  printerName,
+  jobName,
+  timeLeft,
+  finishedAt,
+}: Props) {
   // Convert time left to minutes.
   if (timeLeft > 0) {
     timeLeft = timeLeft / 60;
   }
 
+  // Returns appropriate Job elements dependent on timeLeft.
   switch (true) {
     case timeLeft === 0:
       return (
         <div className={styles.print_job}>
           <h3>{printerName}</h3>
           <div>{jobName}</div>
+          <div>{finishedAt}</div>
         </div>
       );
-      break;
     case timeLeft > 0 && timeLeft < 1:
       return (
         <div className={styles.print_job}>
@@ -32,7 +39,6 @@ export default function Job({ printerName, jobName, timeLeft }: Props) {
           <h4>less than one minute left</h4>
         </div>
       );
-      break;
     case timeLeft > 1 && timeLeft < 60:
       return (
         <div className={styles.print_job}>
@@ -41,7 +47,6 @@ export default function Job({ printerName, jobName, timeLeft }: Props) {
           <h4>{Math.ceil(timeLeft)} minutes left</h4>
         </div>
       );
-      break;
     case timeLeft > 60:
       return (
         <div className={styles.print_job}>
