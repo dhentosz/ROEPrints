@@ -16,10 +16,16 @@ export default function Job({
   timeLeft,
   finishedAt,
 }: Props) {
-  // Convert time left to minutes.
+  // Convert timeLeft to minutes.
   if (timeLeft > 0) {
     timeLeft = timeLeft / 60;
   }
+
+  // Convert finishedAt to local time and format.
+  finishedAt = new Date(finishedAt).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   // Returns appropriate Job elements dependent on timeLeft.
   switch (true) {
@@ -28,7 +34,7 @@ export default function Job({
         <div className={styles.print_job}>
           <h3>{printerName}</h3>
           <div>{jobName}</div>
-          <div>{finishedAt}</div>
+          <div>Finished at: {finishedAt}</div>
         </div>
       );
     case timeLeft > 0 && timeLeft < 1:
