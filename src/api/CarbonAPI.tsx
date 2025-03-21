@@ -108,6 +108,7 @@ export default function CarbonAPI({ printState }: Props) {
           case "PRINTING":
             jobs.push(
               <Job
+                key={printData?.printers[i].prints.current.print_id}
                 printerName={printData?.printers[i].alias}
                 jobName={printData?.printers[i].prints.current.name}
                 timeLeft={printData?.printers[i].prints.current.remaining_sec}
@@ -119,6 +120,7 @@ export default function CarbonAPI({ printState }: Props) {
           case "FINISHING_JOB":
             jobs.push(
               <Job
+                key={printData?.printers[i].prints.last.print_id}
                 printerName={printData?.printers[i].alias}
                 jobName="Print Finishing"
                 timeLeft={0}
@@ -132,6 +134,7 @@ export default function CarbonAPI({ printState }: Props) {
           case "WANT_PART_REMOVAL":
             jobs.push(
               <Job
+                key={printData?.printers[i].prints.last.print_id}
                 printerName={printData?.printers[i].alias}
                 jobName={printData?.printers[i].prints.last.name}
                 timeLeft={0}
