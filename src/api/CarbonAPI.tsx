@@ -52,11 +52,12 @@ export default function CarbonAPI({ printState }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   // API URL and Key variables
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const apiKey = import.meta.env.VITE_API_KEY;
+  const apiUrl = import.meta.env.VITE_FRONTEND_URL;
 
-  // Header to be passed with fetch call for API request
-  const header = { headers: { Authorization: `Bearer ${apiKey}` } };
+  // ** Variables to be removed once backend server integration finalized **
+  // const apiKey = import.meta.env.VITE_API_KEY;
+  // // Header to be passed with fetch call for API request
+  // const header = { headers: { Authorization: `Bearer ${apiKey}` } };
 
   // Empty array for Job components to be gathered
   const jobs: JSX.Element[] = [];
@@ -66,7 +67,7 @@ export default function CarbonAPI({ printState }: Props) {
     // Function to fetch API data and store into state variable printData
     const gatherData = async () => {
       try {
-        fetch(apiUrl, header)
+        await fetch(apiUrl)
           .then((res) => {
             if (!res.ok) {
               throw new Error(`Network Error: ${res.status}`);
