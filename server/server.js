@@ -31,7 +31,7 @@ const apiKey = process.env.VITE_API_KEY;
 // Header to be passed with fetch call for API request
 const header = { headers: { Authorization: `Bearer ${apiKey}` } };
 
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(parentDir, "/dist")));
 
 app.get("/api/carbon", (req, res) => {
   try {
@@ -52,7 +52,7 @@ app.get("/api/carbon", (req, res) => {
 
 // To be used for static files
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/test.html"));
+  res.sendFile(path.join(parentDir, "/dist/index.html"));
 });
 
 app.listen(port, () => {
