@@ -25,3 +25,6 @@ dist-ssr
 
 # userAdded
 _notes.txt
+.pyenv/
+__pycache__/
+tok/
