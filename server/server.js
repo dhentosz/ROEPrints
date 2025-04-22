@@ -6,7 +6,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
-dotenv.config({ path: "../.env.local" });
+dotenv.config({ path: "../.env" });
 
 // express app and port
 const app = express();
