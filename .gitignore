@@ -28,3 +28,4 @@ _notes.txt
 .pyenv/
 __pycache__/
 tok/
+.env
