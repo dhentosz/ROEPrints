@@ -10,7 +10,7 @@ dotenv.config({ path: "../.env" });
 
 // express app and port
 const app = express();
-const port = process.env.PORT;
+const port = process.env.FE_PORT;
 
 // configure cors to accept requests from only dev server of ROEPrints
 const clientOrigin = process.env.ORIGIN_URL;
