@@ -5,4 +5,4 @@ from tok.sec import secPath
 
 def refreshToken(min):
     print("refreshTriggered")
-    print(create_api_token(secPath, min))
+    return create_api_token(secPath, min)
