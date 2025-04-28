@@ -29,3 +29,5 @@ _notes.txt
 __pycache__/
 tok/
 .env
+.env.development
+.env.production
