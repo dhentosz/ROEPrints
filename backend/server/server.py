@@ -14,4 +14,4 @@ CORS(app, origins=[os.getenv("FE_URL")])
 
 @app.route("/")
 def token():
-    return refreshToken(1)
+    return refreshToken(15)

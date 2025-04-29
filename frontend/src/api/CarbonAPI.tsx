@@ -84,10 +84,13 @@ export default function CarbonAPI({ printState }: Props) {
       }
     };
 
+    // Initial data pull
+    gatherData();
+
     // Sets refresh interval to continuously pull data.
     const interval = setInterval(() => {
       gatherData();
-    }, 2000);
+    }, 9000);
 
     return () => clearInterval(interval);
   }, []);

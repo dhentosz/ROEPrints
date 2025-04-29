@@ -50,7 +50,7 @@ async function token() {
 token();
 
 // sets an interval for token to be refreshed
-let jwtRefresh = setInterval(token, 59000);
+let jwtRefresh = setInterval(token, 780000);
 
 app.get("/carbon/prints", (req, res) => {
   try {
