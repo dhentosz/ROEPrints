@@ -5,6 +5,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getCarbonHeader } from "./carbonHeader.js";
 
 dotenv.config({ path: "../.env" });
 
@@ -27,31 +28,18 @@ app.use(
 );
 
 // CarbonAPI variables
-const apiUrl = process.env.VITE_API_URL;
-let apiKey = "";
-let header = { headers: { Authorization: `Bearer ${apiKey}` } };
+const apiUrl = process.env.CARBON_URL;
+let header = await getCarbonHeader();
 
-// fetches new token and updates auth header
-async function token() {
-  try {
-    const BERes = await fetch(process.env.AUTH_URL);
-    if (!BERes.ok) {
-      throw new Error(`NetworkError-tokenrefresh: ${BERes.status}`);
-    }
-    apiKey = await BERes.text();
-    header = { headers: { Authorization: `Bearer ${apiKey}` } };
-    console.log("tokenRefreshed");
-  } catch (e) {
-    console.log(e);
-  }
+// fetches new auth header for CarbonAPI
+async function authHeader() {
+  header = await getCarbonHeader();
 }
 
-// initial token
-token();
-
 // sets an interval for token to be refreshed
-let jwtRefresh = setInterval(token, 780000);
+let jwtInterval = setInterval(authHeader, 780000);
 
+// CarbonPrints endpoint
 app.get("/carbon/prints", (req, res) => {
   try {
     fetch(apiUrl, header)
