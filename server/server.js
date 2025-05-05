@@ -33,7 +33,7 @@ let header = await util.getCarbonHeader();
 
 // fetches new auth header for CarbonAPI
 async function authHeader() {
-  header = util.getCarbonHeader();
+  header = await util.getCarbonHeader();
 }
 
 // sets an interval for token to be refreshed
