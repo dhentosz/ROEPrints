@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import { getCarbonHeader } from "./carbonHeader.js";
+import * as util from "./utilities/index.js";
 
 dotenv.config({ path: "../.env" });
 
@@ -29,32 +29,19 @@ app.use(
 
 // CarbonAPI variables
 const apiUrl = process.env.CARBON_URL;
-let header = await getCarbonHeader();
+let header = await util.getCarbonHeader();
 
 // fetches new auth header for CarbonAPI
 async function authHeader() {
-  header = await getCarbonHeader();
+  header = util.getCarbonHeader();
 }
 
 // sets an interval for token to be refreshed
 let jwtInterval = setInterval(authHeader, 780000);
 
 // CarbonPrints endpoint
-app.get("/carbon/prints", (req, res) => {
-  try {
-    fetch(apiUrl, header)
-      .then((apiRes) => {
-        if (!apiRes.ok) {
-          throw new Error(`Network Error: ${apiRes.status}`);
-        }
-        return apiRes.json();
-      })
-      .then((data) => {
-        res.send(data);
-      });
-  } catch (e) {
-    console.log(e);
-  }
+app.get("/carbon/prints", async (req, res) => {
+  res.send(await util.getCarbonPrints(apiUrl, header));
 });
 
 // Hosts built static files
