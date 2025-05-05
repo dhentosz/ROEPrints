@@ -4,7 +4,7 @@ export async function getCarbonHeader() {
   try {
     const res = await fetch(process.env.AUTH_URL);
     if (!res.ok) {
-      throw new Error(`NetworkError-tokenrefresh: ${res.status}`);
+      throw new Error(`TokenRefresh-NetworkError: ${res.status}`);
     }
     const tok = await res.text();
     console.log("tokenRefreshed");
