@@ -51,32 +51,21 @@ export default function CarbonAPI({ printState }: Props) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // API URL and Key variables
-  const apiUrl = import.meta.env.VITE_FRONTEND_URL;
-
-  // ** Variables to be removed once backend server integration finalized **
-  // const apiKey = import.meta.env.VITE_API_KEY;
-  // // Header to be passed with fetch call for API request
-  // const header = { headers: { Authorization: `Bearer ${apiKey}` } };
-
-  // Empty array for Job components to be gathered
-  const jobs: JSX.Element[] = [];
+  // URL to fetch carbon print data
+  const carbonUrl = import.meta.env.VITE_FRONTEND_URL;
 
   // API Call
   useEffect(() => {
     // Function to fetch API data and store into state variable printData
     const gatherData = async () => {
       try {
-        await fetch(apiUrl)
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`Network Error: ${res.status}`);
-            }
-            return res.json();
-          })
-          .then((data) => {
-            setPrintData(data);
-          });
+        const response = await fetch(carbonUrl);
+        if (!response.ok) {
+          throw new Error(`FECarbonCall-NetworkError: ${response.status}`);
+        }
+        const data = await response.json();
+
+        setPrintData(data);
       } catch (e: any) {
         setError(e.message);
       } finally {
@@ -103,6 +92,9 @@ export default function CarbonAPI({ printState }: Props) {
   if (error) {
     return <p>Error: {error}</p>;
   }
+
+  // Empty array for Job components to be gathered
+  const jobs: JSX.Element[] = [];
 
   // Handles data dependent upon printState prop passed from parent and builds/sorts array of Jobs to pass back accordingly
   if (printData) {
