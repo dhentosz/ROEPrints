@@ -8,7 +8,6 @@
 
 ToDo
 
-    - adjust colors of container headers for better contrast or add backgrounds
     - fix finishing print logic to avoid showing old time prior to API fully updating
     - provide names for unnamed printers via Carbon web interface
     - convert express server to typescript
