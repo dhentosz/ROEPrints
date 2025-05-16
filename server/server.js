@@ -15,9 +15,8 @@ const port = process.env.FE_PORT;
 
 // Gathers directory paths for current and parent directories.
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const parentDir = path.dirname(__dirname);
 
-app.use(express.static(path.join(parentDir, "/dist")));
+app.use(express.static(path.join(__dirname, "/dist")));
 
 // configure cors to accept requests from only dev server of ROEPrints
 const clientOrigin = process.env.ORIGIN_URL;
@@ -46,7 +45,7 @@ app.get("/carbon/prints", async (req, res) => {
 
 // Hosts built static files
 app.get("/", (req, res) => {
-  res.sendFile(path.join(parentDir, "/dist/index.html"));
+  res.sendFile(path.join(__dirname, "/dist/index.html"));
 });
 
 app.listen(port, () => {
